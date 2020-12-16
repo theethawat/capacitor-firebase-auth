@@ -1,52 +1,54 @@
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
-declare module "@capacitor/core" {
+declare module '@capacitor/core' {
   interface PluginRegistry {
-    CapacitorFirebaseAuth?: CapacitorFirebaseAuthPlugin;
+    CapacitorFirebaseAuth?: CapacitorFirebaseAuthPlugin
   }
 }
 
 export interface CapacitorFirebaseAuthPlugin {
-  signIn(options: {providerId: string, data?: SignInOptions}): Promise<SignInResult>;
-  signOut(options: {}): Promise<void>;
+  signIn(options: {
+    providerId: string
+    data?: SignInOptions
+  }): Promise<SignInResult>
+  signOut(options: {}): Promise<void>
 }
 
-export class GoogleSignInResult{
-  providerId = firebase.auth.GoogleAuthProvider.PROVIDER_ID;
-  constructor(public idToken: string) {
-  }
+export class GoogleSignInResult {
+  providerId = firebase.auth.GoogleAuthProvider.PROVIDER_ID
+  constructor(public idToken: string) {}
 }
 
 export class TwitterSignInResult {
-  providerId = firebase.auth.TwitterAuthProvider.PROVIDER_ID;
-  constructor(public idToken: string, public secret: string) {
-  }
+  providerId = firebase.auth.TwitterAuthProvider.PROVIDER_ID
+  constructor(public idToken: string, public secret: string) {}
 }
 
 export class FacebookSignInResult {
-  providerId = firebase.auth.FacebookAuthProvider.PROVIDER_ID;
-  constructor(public idToken: string) {
-  }
+  providerId = firebase.auth.FacebookAuthProvider.PROVIDER_ID
+  constructor(public idToken: string) {}
 }
 
 export class AppleSignInResult {
-  providerId = firebase.auth.FacebookAuthProvider.PROVIDER_ID;
-  constructor(public idToken: string, public rawNonce: string) {
-  }
+  providerId = firebase.auth.FacebookAuthProvider.PROVIDER_ID
+  constructor(public idToken: string, public rawNonce: string) {}
 }
 
 export class PhoneSignInResult {
-  providerId = firebase.auth.PhoneAuthProvider.PROVIDER_ID;
-  constructor(public verificationId: string, public verificationCode: string) {
-  }
+  providerId = firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  constructor(public verificationId: string, public verificationCode: string) {}
 }
 
-export type SignInResult = GoogleSignInResult | TwitterSignInResult | FacebookSignInResult | PhoneSignInResult;
+export type SignInResult =
+  | GoogleSignInResult
+  | TwitterSignInResult
+  | FacebookSignInResult
+  | PhoneSignInResult
 
 export interface PhoneSignInOptions {
-  phone: string,
+  phone: string
   verificationCode?: string
 }
 
-export type SignInOptions = PhoneSignInOptions;
+export type SignInOptions = PhoneSignInOptions

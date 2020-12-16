@@ -1,8 +1,24 @@
-import {User, UserInfo} from 'firebase/app';
-import {Observable, of, pipe, UnaryFunction} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
-import * as firebase from 'firebase/app';
+import { Observable, of, pipe, UnaryFunction } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
+import firebase from 'firebase/app'
 
+interface User {
+  uid: string
+  providerId: string
+  displayName: string
+  photoURL: string
+  phoneNumber: string
+  email: string
+}
+
+interface UserInfo {
+  uid: string
+  providerId: string
+  displayName: string
+  photoURL: string
+  phoneNumber: string
+  email: string
+}
 /**
  * Operator to map firebase.User to firebase.UserInfo.
  *
@@ -19,17 +35,34 @@ import * as firebase from 'firebase/app';
  * )
  * ```
  */
-export const mapUserToUserInfo = (): UnaryFunction<Observable<User>, Observable<UserInfo>> =>
-	pipe(
-		switchMap((user: User) => {
-			if (user) {
-				const {uid, providerId, displayName, photoURL, phoneNumber, email} = user;
-				return of({uid, providerId, displayName, photoURL, phoneNumber, email});
-			}
+export const mapUserToUserInfo = (): UnaryFunction<
+  Observable<User>,
+  Observable<UserInfo>
+> =>
+  pipe(
+    switchMap((user: User) => {
+      if (user) {
+        const {
+          uid,
+          providerId,
+          displayName,
+          photoURL,
+          phoneNumber,
+          email,
+        } = user
+        return of({
+          uid,
+          providerId,
+          displayName,
+          photoURL,
+          phoneNumber,
+          email,
+        })
+      }
 
-			return of(user);
-		}),
-	);
+      return of(user)
+    })
+  )
 
 /**
  * Operator to map firebase.auth.UserCredential to firebase.UserInfo.
@@ -49,14 +82,37 @@ export const mapUserToUserInfo = (): UnaryFunction<Observable<User>, Observable<
  * )
  * ```
  */
-export const mapUserCredentialToUserInfo = (): UnaryFunction<Observable<{userCredential: firebase.auth.UserCredential}>, Observable<UserInfo>> =>
-	pipe(
-		switchMap(({userCredential}: {userCredential: firebase.auth.UserCredential}) => {
-			if (!!userCredential) {
-				const {uid, providerId, displayName, photoURL, phoneNumber, email} = userCredential.user;
-				return of({uid, providerId, displayName, photoURL, phoneNumber, email});
-			}
+export const mapUserCredentialToUserInfo = (): UnaryFunction<
+  Observable<{ userCredential: firebase.auth.UserCredential }>,
+  Observable<UserInfo>
+> =>
+  pipe(
+    switchMap(
+      ({
+        userCredential,
+      }: {
+        userCredential: firebase.auth.UserCredential
+      }) => {
+        if (!!userCredential) {
+          const {
+            uid,
+            providerId,
+            displayName,
+            photoURL,
+            phoneNumber,
+            email,
+          } = userCredential.user
+          return of({
+            uid,
+            providerId,
+            displayName,
+            photoURL,
+            phoneNumber,
+            email,
+          })
+        }
 
-			return of(null);
-		}),
-	);
+        return of(null)
+      }
+    )
+  )
