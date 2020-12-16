@@ -2,6 +2,8 @@
 
 # capacitor-firebase-auth
 
+Fork From [baumblatt/capacitor-firebase-auth](https://github.com/baumblatt/capacitor-firebase-auth)
+
 ## Trying on Firebase 8
 
 > Because of Firebase 8 has many things changes and sometimes no backward compatible
@@ -19,6 +21,28 @@ import * as firebase from 'firebase'
 
 as it was on the older version of firebase.
 I had seen in next branch but this repository build for local package use.
+
+## To use in local
+
+This isn't current in NPM because of I think baumblatt/capacitor-firebase-auth will be released for the next version, when it's stable. So use it
+if you want to use this one you can build it with
+
+- Clone this Repository
+- run `npm install` to install dependencies
+- run `npm run prepublishOnly` to build the package (after that package file will located in /dist/)
+- run `npm init --scope=@your-username` to make your package
+- run `npm link`
+
+and one your another directory or another project on your computer if you want to install this package
+run
+
+```
+npm link @your-username/packagename
+```
+
+and working like it is imported from NPM Registry
+
+Thank you @baumblatt a lot for this research.
 
 ---
 
@@ -414,7 +438,7 @@ cfaSignInPhoneOnCodeReceived().subscribe(
 Suggestion for web authentication code to iOS, the ``verificationCode` must be provided by the user, please see [Firebase documentation](https://firebase.google.com/docs/auth/web/phone-auth#sign-in-the-user-with-the-verification-code) for better options.
 
 ```typescript
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 
 const credential = firebase.auth.PhoneAuthProvider.credential(
@@ -436,7 +460,7 @@ the token and secret are returned for use with Twitter User API.
 #### Sign in
 
 ```typescript
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import { cfaSignIn, SignInResult } from 'capacitor-firebase-auth/alternative'
 import { SignInResult } from './definitions'
 
