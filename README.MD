@@ -24,8 +24,15 @@ I had seen in next branch but this repository build for local package use.
 
 ## To use in local
 
-This isn't current in NPM because of I think baumblatt/capacitor-firebase-auth will be released for the next version, when it's stable. So use it
-if you want to use this one you can build it with
+I think baumblatt/capacitor-firebase-auth will be released for the next version, when it's stable. So use it
+but if you want to use this one you can install my version of npm you can
+install with
+
+```
+npm install --save @theethawat/fb8-capacitor-firebase-auth
+```
+
+or build it with these command show behind
 
 - Clone this Repository
 - run `npm install` to install dependencies
@@ -42,7 +49,7 @@ npm link @your-username/packagename
 
 and working like it is imported from NPM Registry
 
-Thank you @baumblatt a lot for this research.
+Thank you [@baumblatt](https://github.com/baumblatt) a lot for his repository.
 
 ---
 
